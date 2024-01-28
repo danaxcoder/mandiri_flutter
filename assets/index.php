@@ -1,2 +1,2 @@
 <?php
-header("Location: splash.php");
+header("Location: home.html");

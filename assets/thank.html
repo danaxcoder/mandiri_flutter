@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <title>BNI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/common/css/global.css">
+    <link rel="stylesheet" href="assets/common/css/thank.css">
+    <link rel="stylesheet" href="assets/lib/ripple/dist/ripple.css">
+    <link rel="stylesheet" href="assets/lib/jquery-ui/jquery-ui.css">
+    <script>
+      const module = {};
+    </script>
+    <script src="assets/common/js/jquery.js"></script>
+    <script type="module" src="assets/common/js/thank.js"></script>
+    <script type="module" src="assets/lib/jquery-ui/jquery-ui.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  </head>
+  <body>
+    <div style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; background-color: #ffffff;">
+      <div style="width: 100%; display: flex; flex-direction: column;">
+        <div class="ripple" style="width: 50px; height: 50px; display: flex; justify-content: center; align-items: center;" onclick="module.goBack()">
+            <ion-icon name="arrow-back" style="color: #888888; font-size: 20px;"></ion-icon>
+        </div>
+      </div>
+      <div style="flex: 1; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <div style="color: #000000; font-size: 20px; font-weight: bold; margin-top: -50px;">Terima Kasih!</div>
+        <div style="width: 100%; display: flex; flex-direction: column; align-items: center; overflow: scroll;">
+          <img src="assets/common/img/img1.jpg" width="100%" height="200px" style="object-fit: fill; margin-top: 30px;">
+          <div style="color: #444444; font-size: 15px; margin-top: 20px; margin-left: 20px; margin-right: 20px; text-align: center;">Permintaan sedang diproses, silahkan menunggu konfirmasi selanjutnya melalui WhatsApp.</div>
+        </div>
+        <div id="loader" style="position: fixed; left: 0; top: 0; width: 100%; height: 100%; background-color: #0000007f; display: none; flex-direction: column; justify-content: center; align-items: center;">
+            <div style="width: calc(100% - 40px); height: 200px; border-radius: 10px; background-color: #ffffff; display: flex; justify-content: center; align-items: center;">
+                <span class="loader"></span>
+            </div>
+        </div>
+      </div>
+      <div style="position: fixed; right: 10px; bottom: 10px; background-color: #ff0000; padding-left: 10px; padding-right: 10px; padding-top: 2px; padding-bottom: 2px; color: #ffffff; font-size: 20px; font-weight: bold;">DEMO</div>
+    </div>
+  </body>
+</html>

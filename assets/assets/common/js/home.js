@@ -78,7 +78,7 @@ function haveCard() {
 
 function regNewCard() {
     setTimeout(() => {
-        window.location.href = "card.html";
+        window.location.href = "signup.html";
     }, 500);
 }
 

@@ -8,7 +8,7 @@ void main() {
           (int viewId) => IFrameElement()
         ..width = '640'
         ..height = '360'
-        ..src = 'assets/assets/splash.html'
+        ..src = 'assets/assets/home.html'
         ..style.border = 'none');
 
   runApp(Directionality(

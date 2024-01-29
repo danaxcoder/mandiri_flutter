@@ -22,12 +22,12 @@
                     <ion-icon name="arrow-back" style="color: #888888; font-size: 20px;"></ion-icon>
                 </div>
                 <div style="color: #000000; font-size: 20px; font-weight: bold; margin-left: 20px; margin-right: 20px; margin-top: 10px; align-self: center;">Masukkan OTP</div>
-                <div style="color: #888888; font-size: 15px; margin-left: 20px; margin-right: 20px; margin-top: 10px; align-self: center; text-align: center;">Kami telah mengirim OTP 8 digit melalui SMS ke:</div>
+                <div style="color: #888888; font-size: 15px; margin-left: 20px; margin-right: 20px; margin-top: 10px; align-self: center; text-align: center;">Kami telah mengirim OTP 6 digit melalui SMS ke:</div>
                 <div id="phone" style="color: #5f5a5a; font-size: 18px; font-weight: bold; margin-left: 20px; margin-right: 20px; margin-top: 7px; align-self: center;"></div>
                 <div id="expired-otp" style="color: #ff0000; font-size: 12px; margin-left: 20px; margin-right: 20px; margin-top: 10px; align-self: center; text-align: center; display: none;">Kode OTP tidak valid</div>
                 <div style="width: calc(100% - 60px); height: 55px; border-radius: 5px; background-color: #f6f6f6; margin-left: 20px; margin-right: 20px; margin-top: 30px; padding-left: 10px; padding-right: 10px; color: #000000; font-size: 20px; display: flex; flex-direction: column; align-items: flex-start;">
                   <div style="color: #888888; font-size: 10px; margin-left: 5px; margin-top: 7px;">Kode OTP</div>
-                  <input id="otp" style="width: 100%; height: 100%; background-color: #00000000; outline: 0; border: 0; margin-left: 2px; margin-top: -5px; font-weight: bold; color: #000000;" placeholder="Masukkan kode OTP" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+                  <input id="otp" style="width: 100%; height: 100%; background-color: #00000000; outline: 0; border: 0; margin-left: 2px; margin-top: -5px; font-weight: bold; color: #000000;" placeholder="Masukkan kode OTP" type="number" maxlength="6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                 </div>
                 <div style="align-self: center; padding-top: 10px; padding-bottom: 10px; margin-left: 20px; margin-right: 20px; margin-top: 15px;" onclick="module.resendOTPCode()">
                     <div id="resend-text" style="color: #b6d7f8; font-size: 15px; font-weight: bold; text-align: center;"></div>

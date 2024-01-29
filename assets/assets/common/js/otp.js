@@ -1,5 +1,5 @@
 var currentField = 0;
-var timeout = 60;
+var timeout = 3*60;
 var timeoutHandler = null;
 var phone = "";
 var action = "";
@@ -125,7 +125,7 @@ function deleteNum() {
 function resendOTPCode() {
     if (timeout <= 1) {
         $("#resend-text").css("color", "#b6d7f8");
-        timeout = 60;
+        timeout = 3*60;
         $("#resend-text").html("Kirim ulang SMS dalam "+timeout+" detik");
         timeoutHandler = setTimeout(timeoutHandling, 1000);
     }
